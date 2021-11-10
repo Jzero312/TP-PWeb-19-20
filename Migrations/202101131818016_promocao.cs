@@ -1,0 +1,18 @@
+namespace PWebTudoDeNovo.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class promocao : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.Products", "Promocao", c => c.Int(nullable: false));
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.Products", "Promocao");
+        }
+    }
+}

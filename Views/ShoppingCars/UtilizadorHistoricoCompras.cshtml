@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "UtilizadorHistoricoCompras";
+}
+
+<h2>Historico Compras</h2>
+@foreach (var carro in @ViewBag.Carrinhos)
+{
+    <li> Preço Total: @carro.PrecoTotal €</li>
+    <table class="table">
+        <tr>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Produto
+            </th>
+            <th>
+                Preço a Unidade
+            </th>
+            <th>
+                Metodo de entrega
+            </th>
+            <th>
+                Unidades Compradas
+            </th>
+
+            <th>
+                Preço
+            </th>
+            <th>
+                Estado
+            </th>
+        </tr>
+
+        @foreach (var item in @ViewBag.Compras)
+        {
+            if (item.IdShoppingCar == carro.IdShoppingCar)
+            {
+                <tr>
+                    <td>
+                        @item.Product.Categoria.Nome
+                    </td>
+                    <td>
+                        @item.Product.Nome
+                    </td>
+                    <td>
+                        @item.Product.Preco €
+                    </td>
+                    <th>
+                        @item.MetedoDeEntrega
+                    </th>
+                    <th>
+                        @item.QuantidadeAComprar
+                    </th>
+                    <th>
+                        @item.precoComDesconto €
+                    </th>
+                    <th>
+                        @item.EstadoCompra
+                    </th>
+                </tr>
+            }
+        }
+
+    </table>
+
+}
+

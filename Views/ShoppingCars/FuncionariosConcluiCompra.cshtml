@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PWebTudoDeNovo.Models.Purchase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Aceitar Compras</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Categoria
+        </th>
+        <th>
+            Produto
+        </th>
+        <th>
+            Preço a Unidade
+        </th>
+        <th>
+            Em Stock
+        </th>
+        <th>
+            Metodo de entrega
+        </th>
+        <th>
+            Unidades a Comprar
+        </th>
+        <th>
+            Preço
+        </th>
+        <th>
+            Consomidor
+        </th>
+        <th>
+
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Categoria.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Preco) €
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Stock)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.MetedoDeEntrega)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.QuantidadeAComprar)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.precoComDesconto) €
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.ShoppingCar.ApplicationUser.Email)
+            </th>
+            <td>
+                @using (Html.BeginForm("ConcluiCompra", "ShoppingCars", FormMethod.Get))
+                {
+                    <input type="hidden" name="id" value="@item.IdPurchase" />
+                    <input type="submit" value="Concluir" />
+
+                }
+            </td>
+
+
+
+        </tr>
+    }
+
+</table>

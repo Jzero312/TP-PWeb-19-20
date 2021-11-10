@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PWebTudoDeNovo.Models.Product>
+@{
+    ViewBag.Title = "FuncionariosEditDescontos";
+}
+
+<h2>Descontos</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Categoria
+        </th>
+        <th>
+            Produto
+        </th>
+        <th>
+            Preço a Unidade
+        </th>
+        <th>
+            Em Stock
+        </th>
+        <th>
+            Desconto
+        </th>
+        <th></th>
+        <th></th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco) €
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            @using (Html.BeginForm("AlteraDescontoDoProduto", "Home", FormMethod.Get))
+            {
+                <th>
+                    <input type="hidden" name="id" value="@item.idProduto" />
+                    <input type="number" name="Desconto" value="@item.Promocao" max="100" min="0" />
+                </th>
+                <td>
+                    <input type="submit" value="editar" />
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+
+

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<PWebTudoDeNovo.Models.Purchase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Categoria
+        </th>
+        <th>
+            Produto
+        </th>
+        <th>
+            Preço a Unidade
+        </th>
+        <th>
+            Em Stock
+        </th>
+        <th>
+            Metodo de entrega
+        </th>
+        <th>
+            Unidades a Comprar
+        </th>
+        <th>
+            Preço
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Categoria.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Preco) €
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Stock)
+            </td>
+            @using (Html.BeginForm("Edit", "ShoppingCars", FormMethod.Get))
+            {
+                <th>
+
+                    <select name="MEntrega" value="@item.MetedoDeEntrega">
+                        <option value="@item.MetedoDeEntrega" selected disabled hidden>
+                            @item.MetedoDeEntrega
+                        </option>
+                        <option value="Recolha na Loja">Recolha na Loja</option>
+                        <option value="Entrega em casa">Entrega em casa</option>
+                    </select>
+                </th>
+
+
+                <th>
+                    <input type="hidden" name="id" value="@item.IdPurchase" />
+                    <input type="number" name="valor" value="@item.QuantidadeAComprar" max=@item.Product.Stock min="1" />
+
+
+
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.precoComDesconto) €
+                </th>
+
+
+                <td>
+                    <input type="submit" value="editar" />
+                </td>
+            }
+            <td>
+                @using (Html.BeginForm("Delete", "ShoppingCars", FormMethod.Get))
+                {
+                    <input type="hidden" name="id" value="@item.IdPurchase" />
+                    <input type="submit" value="Eliminar" />
+
+                }
+            </td>
+
+
+
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+@using (Html.BeginForm("FinalizarCompra", "ShoppingCars", FormMethod.Get))
+{
+<p>
+    Preço Total:
+    @ViewBag.PrecoTotal
+    <input type="hidden" name="shoppingCarId" value="@ViewBag.idCarrinho" />
+    <input type="submit" value="Finalizar Compra" style="margin-left:20px;" />
+    
+</p>
+}
+
+
+
+
+
+
